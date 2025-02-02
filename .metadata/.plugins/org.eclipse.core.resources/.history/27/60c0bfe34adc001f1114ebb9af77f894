@@ -1,0 +1,187 @@
+package lab1;
+
+public class Lab1Utilities {
+    // ALREADY IMPLEMENTED; DO NOT MODIFY
+
+    private Lab1Utilities() {
+        // empty to prevent object creation
+    }
+
+    /**
+     * Calculates and returns the weather season for the given month and day in Toronto.
+     *
+     * @param month The month as an integer (1 for January, 2 for February, etc.)
+     * @param day   The day as an integer (1-31)
+     * @return The current weather season in Toronto
+     */
+    public static String weather(int month, int day) {
+        if ((month == 12 && day >= 15) || (month == 1) || (month == 2) || (month == 3 && day <= 25)) {
+            return "The current weather season is Winter";
+        }
+
+        if ((month == 4 || month == 5) && (day >= 1 && day <= 31)) {
+            return "The current weather season is Spring";
+        }
+
+        if ((month == 6) || (month == 7) || (month == 8) || (month == 9 && day <= 15)) {
+            return "The current weather season is Summer";
+        }
+
+        if ((month == 9 && day > 15) || (month == 10) || (month == 11)) {
+            return "The current weather season is Fall";
+        }
+
+        return "Unknown";
+    }
+
+    /**
+     * Converts Fahrenheit to Celsius.
+     *
+     * @param fahrenheit The temperature in Fahrenheit
+     * @return The conversion result in Celsius, formatted as a string
+     */
+    public static String temperatureConverter(double fahrenheit) {
+        double celsius = (5.0 / 9.0) * (fahrenheit - 32);
+
+        return String.format("Fahrenheit (%.1f) is equivalent to (%.2f) in Celsius", fahrenheit, celsius);
+    }
+
+    /**
+     * Converts age in days to age in years, months, and remaining days.
+     *
+     * @param days The age in days
+     * @return The age in years, months, and days as a formatted string
+     */
+    public static String ageInYearsDetailed(int days) {
+        int years = days / 365;
+        int months = (days % 365) / 30;
+        int remainingDays = (days % 365) % 30;
+
+        return String.format("Age in days (%d), age in years (%d), months (%d) with remaining days (%d)",
+                             days, years, months, remainingDays);
+    }
+
+    /**
+     * Converts centimeters to feet and inches.
+     *
+     * @param cm The length in centimeters
+     * @return The conversion result in feet and inches as a formatted string
+     */
+    public static String distanceConverter(double cm) {
+        double inches = cm / 2.54;
+        int feet = (int) (inches / 12);
+        double remainingInches = inches % 12;
+        return String.format("%.2f cm is %d ft and %.2f in", cm, feet, remainingInches);
+    }
+
+    /**
+     * Calculates the account balance after five years with interest.
+     *
+     * @param balance  The initial balance
+     * @param interest The annual interest rate in percentage
+     * @return The balance after five years with interest as a formatted string
+     */
+    public static String fiveYearBalance(double balance, double interest) {
+        for (int i = 0; i < 5; i++) {
+            balance += balance * (interest / 100);
+        }
+
+        return String.format("The balance was %.2f with interest %.2f, after five years balance is %.2f",
+                             balance - (balance * (interest / 100) * 5), interest, balance);
+    }
+
+    /**
+     * Calculates and returns the Body Mass Index (BMI).
+     *
+     * @param weight The weight in kilograms
+     * @param height The height in meters
+     * @return The BMI as a formatted string
+     */
+    public static String computeBMI(double weight, double height) {
+        if (height <= 0) {
+            return "Height must be a positive value.";
+        }
+
+        double bmi = weight / (height * height);
+        return String.format("BMI: %.2f", bmi);
+    }
+
+}
+
+	public static double computeBMI(int pounds, int feet, int inches) {
+		/*
+		 * Your implementation of this method starts here. Recall that : 1. No
+		 * System.out.println statements should appear here. Instead, you need to return
+		 * the result. 2. No Scanner operations should appear here (e.g.,
+		 * input.nextInt()). Instead, refer to the input parameters of this method.
+		 */
+		double kg = pounds * 0.453592; // Weight of the person
+
+		double m = (feet * 0.3048) + (inches * 0.0254);
+
+		double bmi = kg / Math.pow(m, 2);
+
+		return Math.round(bmi * 100.0) / 100.0;
+	}
+
+	/**
+	 * Write a static method to determine if the given integer is perfect square.
+	 * <p>
+	 * Note: The numbers 0, 1, 4, 9, 16, 25, ... are perfect squares.
+	 * </p>
+	 * <p>
+	 * <strong> Use of arrays or any Java library class (e.g., array, ArrayList ) is
+	 * strictly forbidden. Violation of this will result in a 50% penalty on your
+	 * marks. Try to solve this problem using Java Control Structures (selection
+	 * structures, repetition structures, and nested Loops) only </strong>
+	 * </p>
+	 * <p>
+	 * For example:
+	 * </p>
+	 * 
+	 * <pre>
+	 * if n = 0 then 	return "Integer 0 is Perfect Square"
+	 * if n= 10  then  return "Integer 10 is NOT Perfect Square"
+	 * if n= 63 then  return "Integer 63 is NOT Perfect Square"
+	 * if n= 64  then  return "Integer 64 is NOT Perfect Square"
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * <strong> Use of arrays or any Java library class (e.g., array, ArrayList ) is
+	 * strictly forbidden. Violation of this will result in a 70% penalty on your
+	 * marks. Try to solve this problem using Java Control Structures (selection
+	 * structures, repetition structures, and nested Loops) only </strong>
+	 * </p>
+	 * <p>
+	 * Make sure the method compiles without errors and returns the correct result
+	 * when invoked.
+	 * </p>
+	 * 
+	 * @param n :int input integer
+	 * 
+	 *          @pre.
+	 *          <p>
+	 *          <strong> Precondition </strong>
+	 *          </p>
+	 *          <p>
+	 *          You may assume that the integer n is No negative integer
+	 *          </p>
+	 * 
+	 * @return String value see the above examples
+	 */
+
+	public static String isPerfectSquare(int n) {
+		//Static method to determine if the given integer is a perfect square
+		int sqrt = (int) Math.sqrt(n);
+
+		if(sqrt * sqrt == n){
+			return "Integer" + n + "is Perfect square";
+		} else {
+			return "Integer" + n + "is not a perfect square";
+		}
+	}
+	
+
+	}
+

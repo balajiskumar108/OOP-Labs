@@ -1,0 +1,105 @@
+package lab1;
+
+public class Lab1Utilities {
+    // ALREADY IMPLEMENTED; DO NOT MODIFY
+
+    private Lab1Utilities() {
+        // empty to prevent object creation
+        // ALREADY IMPLEMENTED; DO NOT MODIFY
+    }
+
+    /**
+     * Returns the standard Toronto weather season based on the given month and day.
+     *
+     * @param month Positive integer between 1 and 12, representing a month (1 for January, 2 for February, etc.)
+     * @param day   Positive integer representing a day (1 to 31).
+     * @return String indicating the weather season.
+     */
+    public static String weather(int month, int day) {
+        if ((month == 12 && day >= 15) || (month == 1) || (month == 2) || (month == 3 && day <= 25)) {
+            return "The current weather season is Winter";
+        }
+
+        if ((month == 4 || month == 5) && (day >= 1 && day <= 31)) {
+            return "The current weather season is Spring";
+        }
+
+        if ((month == 6) || (month == 7) || (month == 8) || (month == 9 && day <= 15)) {
+            return "The current weather season is Summer";
+        }
+
+        if ((month == 9 && day > 15) || (month == 10) || (month == 11)) {
+            return "The current weather season is Fall";
+        }
+
+        return "Unknown";
+    }
+
+    /**
+     * Converts Fahrenheit temperature to Celsius.
+     *
+     * @param fahrenheit Temperature in Fahrenheit.
+     * @return String showing the equivalent Celsius temperature.
+     */
+    public static String temperatureConverter(double fahrenheit) {
+        double celsius = (5.0 / 9.0) * (fahrenheit - 32);
+        return String.format("Fahrenheit (%.1f) is equivalent to (%.2f) in Celsius", fahrenheit, celsius);
+    }
+
+    /**
+     * Converts age in days to age in years, months, and remaining days.
+     *
+     * @param days Age in days.
+     * @return String showing the age in years, months, and remaining days.
+     */
+    public static String ageInYearsDetailed(int days) {
+        int years = days / 365;
+        int months = (days % 365) / 30;
+        int remainingDays = (days % 365) % 30;
+
+        return String.format("Age in days (%d), age in years is (%d), months (%d), with remaining days (%d)", days, years, months, remainingDays);
+    }
+
+    /**
+     * Converts centimeters to feet and inches.
+     *
+     * @param cm The value in centimeters.
+     * @return String showing the converted feet and inches.
+     */
+    public static String distanceConverter(double cm) {
+        double inches = cm / 2.54;
+        int feet = (int) (inches / 12);
+        double remainingInches = inches % 12;
+        return String.format("%.2f cm is %d ft and %.2f in", cm, feet, remainingInches);
+    }
+
+    /**
+     * Calculates the balance after five years with annual compounding interest.
+     *
+     * @param balance  Initial account balance.
+     * @param interest Annual interest rate in percentage.
+     * @return String showing the balance after five years.
+     */
+    public static String fiveYearBalance(double balance, double interest) {
+        for (int i = 0; i < 5; i++) {
+            balance += balance * (interest / 100);
+        }
+        return String.format("The balance was %.2f with interest %.2f, after five years balance is %.2f", balance - balance * (interest / 100), interest, balance);
+    }
+
+
+
+	public static String isPerfectSquare(int n) {
+		//Static method to determine if the given integer is a perfect square
+		int sqrt = (int) Math.sqrt(n);
+
+		if(sqrt * sqrt == n){
+			return "Integer" + n + "is Perfect square";
+		} else {
+			return "Integer" + n + "is not a perfect square";
+		}
+	}
+	
+
+	}
+
