@@ -1,6 +1,6 @@
 package lab2;
 
-//You are NOT allowed to add any "import" statement other than 
+//You are NOT allowed to add any "import" statement other than ''''''''''[[[[;']''[[[[
 //the ones already in the starter files. 
 
 
@@ -61,7 +61,14 @@ public class Lab2Utilities {
 		 *    Instead, refer to the input parameters of this method.   
 		 */
 		
-		return -999;
+		int count = 0;
+		
+		for(int i = 0; i < str.length(); i++) {
+			if(Character.isDigit(str.charAt(i))) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	/**
@@ -79,7 +86,7 @@ public class Lab2Utilities {
 	 * <p>
 	 * For example:
 	 * </p>
-	 * 
+	 *                  
 	 * <pre>
 	 * if n=5, x= 5 and y =10 then some of possible returned strings {@code <6><8><9><10><7>} 
 	 * or {@code <8><9><6><6><7>} , {@code <9><6><9><6><9>},..., {@code <5><9><6><5><10>},... .
@@ -111,8 +118,16 @@ public class Lab2Utilities {
 		 * 2. No Scanner operations should appear here (e.g., input.nextInt()).
 		 *    Instead, refer to the input parameters of this method.   
 		 */
-
-		return "";
+		
+		String result = "";
+		Random random = new Random();
+		
+		for(int i = 0; i < n; i++) {
+			int rand = x + random.nextInt(y - x + 1);
+			result += "<" + rand + ">";
+		}
+		
+		return result;
 
 	}
 
@@ -148,7 +163,18 @@ public class Lab2Utilities {
 		 *    Instead, refer to the input parameters of this method.   
 		 */
 	
-		return -999;
+		int currentZero = 0;
+		int maxZero = 0;
+		
+		for(char c : str.toCharArray()) {
+			if(c == '0') {
+				currentZero++;
+				maxZero = Math.max(maxZero, currentZero);
+			}  else {
+				currentZero = 0;
+			}
+		}
+		return maxZero;
 	}
 
 	
@@ -214,19 +240,51 @@ public class Lab2Utilities {
 	
 	
 	public static String mixStrings(String s1, String s2, String s3) {
-		
-		
-		/* Your implementation of this method starts here. 
-		 * Recall that :
-		 * 1. No System.out.println statements should appear here.
-		 * 	  Instead, you need to return the result.
-		 * 2. No Scanner operations should appear here (e.g., input.nextInt()).
-		 *    Instead, refer to the input parameters of this method.   
-		 */
-		
-			
-		return "";
-		
+	    /* Your implementation of this method starts here. 
+	     * Recall that:
+	     * 1. No System.out.println statements should appear here.
+	     *    Instead, you need to return the result.
+	     * 2. No Scanner operations should appear here (e.g., input.nextInt()).
+	     *    Instead, refer to the input parameters of this method.   
+	     */
+	    
+	    if (s1.length() == 0 || s2.length() == 0 || s3.length() == 0) {
+	        return "Invalid";
+	    }
+	    
+	    String result = "";
+	    
+	    // Extract the first half of s1
+	    int halfLen = s1.length() / 2;
+	    if (s1.length() % 2 == 0) {
+	        result += s1.substring(0, halfLen);
+	    } else {
+	        result += s1.substring(0, halfLen + 1);
+	    }
+	    
+	    // Extract and copy characters from s2
+	    String part2;
+	    if (s2.length() >= 2) {
+	        part2 = s2.substring(s2.length() - 2); // Last two characters from s2
+	    } else {
+	        part2 = s2.substring(0, 1); // Only one character from s2
+	    }
+	    for (int i = 0; i < 3; i++) {
+	        result += part2; // Repeat part2 three times
+	    }
+	    
+	    // Extract and copy characters from s3
+	    String part3;
+	    if (s3.length() >= 2) {
+	        part3 = s3.substring(0, 2); // First two characters from s3
+	    } else {
+	        part3 = s3.substring(0, 1); // Only one character from s3
+	    }
+	    for (int i = 0; i < 5; i++) {
+	        result += part3; // Repeat part3 five times
+	    }
+	    
+	    return result;
 	}
 
 	
@@ -267,7 +325,31 @@ public class Lab2Utilities {
 		 *    Instead, refer to the input parameters of this method.   
 		 */
        
-        return "";
+        if(inputStr.isEmpty()) {
+        	return "";
+        }
+        
+        StringBuilder result = new StringBuilder();
+        int count = 1;
+        
+        //Traverse the string starting front from the second character
+        for(int i = 0; i < inputStr.length(); i++) {
+        	//If the current character is same as the previous one
+        	if(inputStr.charAt(i) == inputStr.charAt(i - 1)) {
+        		count++;
+        	} else {
+        		result.append(inputStr.charAt(i - 1));
+        		result.append(count);
+        		
+        		count = 1;
+        	}
+        }
+        
+        //Append the last character and its count
+        result.append(inputStr.charAt(inputStr.length() - 1));
+        result.append(count);
+        
+        return result.toString();
     }
 
 	
