@@ -404,9 +404,15 @@ public class Lab2Utilities {
 		 * 2. No Scanner operations should appear here (e.g., input.nextInt()).
 		 *    Instead, refer to the input parameters of this method.   
 		 */
-
 		
-		return "";
+		String binary = "";
+		
+		for(int i = 15; i >= 0; i--) {
+			int bit = (value >> i) & 1; //Extract the i-th bit 
+			binary += bit;
+		}
+		
+		return "The decimal value (" + value + ") has binary representation [" + binary + "]";
 
 	}
 
@@ -457,10 +463,21 @@ public class Lab2Utilities {
 	 */	
 	public static String binaryXor(short value1 , short value2) {
 		
+		String result = "";
 		
-        return "";
-  
+		//Perform XOR on each bit from 15 to 0
+		for(int i = 0; i >= 0; i--) {
+			int bit1 = (value1 >> i) & 1;
+			int bit2 = (value2 >> i) & 1;
+			
+			if(bit1 == bit2) {
+				result = "0" + result;
+			} else {
+				result = "1" + result;
+			}
+		}
 		
+		return "XOR of two values is ["+ result +  "]";
 	}
 	
 	
@@ -520,8 +537,31 @@ public class Lab2Utilities {
 		 *    Instead, refer to the input parameters of this method.   
 		 */
 		
-		return "";
-
+		if(lowerLimit > upperLimit) {
+			return "Error: Lower limit: (" + lowerLimit + ") is not less than or equal to (" + upperLimit + ")";
+		}
+		
+		int count3 = 0;
+		int count5 = 0;
+		int count7 = 0;
+		
+		for(int i = lowerLimit; i <= upperLimit; i++) {
+			
+			if(i % 3 == 0) {
+				count3++;
+			}
+			
+			if(i % 5 == 0) {
+				count5++;
+			}
+			
+			if(i % 7 == 0) {
+				count7++;
+			}
+		}
+		
+		return String.format("Between (%d) and (%d) there are (%d) multiples of 3, there are (%d) multiples of 5 and there are (%d) multiples of 7", 
+				lowerLimit, upperLimit, count3, count5, count7);
 	}
 	
 	/**
@@ -560,7 +600,29 @@ public class Lab2Utilities {
 		 *    Instead, refer to the input parameters of this method.   
 		 */
 		
-		return "";
+		if(n < 10) {
+			return "Integer" + n + "is palindrome";
+		}
+		
+		
+		int original = n;
+		int reverse = 0;
+		
+		
+		//Reverse the digits of n
+		while(n > 0) {
+			int lastdigit = n % 10;
+			reverse = reverse * 10 + lastdigit;
+			n /= 10;
+		}
+		
+		
+		//Compare the original number with the reverse number
+		if(original == reverse) {
+			return "Integer" + original + "is Palindrome";
+		} else {
+			return "Integer" + original + "is not palindrome";
+		}
 	}
 
 	
