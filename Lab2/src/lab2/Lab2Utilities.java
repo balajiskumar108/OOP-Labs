@@ -224,23 +224,23 @@ public class Lab2Utilities {
 		// Extract and copy characters from s2
 		String part2;
 		if (s2.length() >= 2) {
-			part2 = s2.substring(s2.length() - 2); // Last two characters from s2
+			part2 = s2.substring(s2.length() - 2); 
 		} else {
-			part2 = s2.substring(0, 1); // Only one character from s2
+			part2 = s2.substring(0, 1); 
 		}
 		for (int i = 0; i < 3; i++) {
-			result += part2; // Repeat part2 three times
+			result += part2; 
 		}
 
 		// Extract and copy characters from s3
 		String part3;
 		if (s3.length() >= 2) {
-			part3 = s3.substring(0, 2); // First two characters from s3
+			part3 = s3.substring(0, 2); 
 		} else {
-			part3 = s3.substring(0, 1); // Only one character from s3
+			part3 = s3.substring(0, 1); 
 		}
 		for (int i = 0; i < 5; i++) {
-			result += part3; // Repeat part3 five times
+			result += part3; 
 		}
 
 		return result;
@@ -277,7 +277,6 @@ public class Lab2Utilities {
 
 		// Traverse the string starting from the second character
 		for (int i = 1; i < inputStr.length(); i++) {
-			// If the current character is same as the previous one
 			if (inputStr.charAt(i) == inputStr.charAt(i - 1)) {
 				count++;
 			} else {
@@ -332,15 +331,18 @@ public class Lab2Utilities {
 	 *         </p>
 	 */
 	public static String binaryRepresentation(short value) {
-		String binary = "";
+	    String binary = "";
+	    int curr = value;
 
-		for (int i = 15; i >= 0; i--) {
-			int bit = (value >> i) & 1; // Extract the i-th bit
-			binary += bit;
-		}
+	    for (int i = 0; i < 16; i++) {
+	        int bit = curr % 2; 
+	        binary = bit + binary; 
+	        curr = curr / 2; 
+	    }
 
-		return "The decimal value (" + value + ") has binary representation [" + binary + "]";
+	    return "The decimal value (" + value + ") has binary representation [" + binary + "]";
 	}
+
 
 	/**
 	 * Write a static method that receives two short values that can be stored in 16
@@ -385,22 +387,25 @@ public class Lab2Utilities {
 	 *         </p>
 	 */
 	public static String binaryXor(short value1, short value2) {
-		StringBuilder result = new StringBuilder();
-
-		// Perform XOR on each bit from 15 to 0
-		for (int i = 15; i >= 0; i--) {
-			int bit1 = (value1 >> i) & 1;
-			int bit2 = (value2 >> i) & 1;
-
-			if (bit1 == bit2) {
-				result.append("0");
-			} else {
-				result.append("1");
-			}
-		}
-
-		return "XOR of two values is [" + result.toString() + "]";
+	    StringBuilder result = new StringBuilder();
+	    
+	    for (int i = 0; i < 16; i++) {
+	        int bit1 = value1 % 2;
+	        int bit2 = value2 % 2;
+	        
+	        if (bit1 == bit2) {
+	            result.append("0");
+	        } else {
+	            result.append("1");
+	        }
+	        
+	        value1 = (short) (value1 / 2);
+	        value2 = (short) (value2 / 2);
+	    }
+	    return "XOR of two values is [" + result.reverse().toString() + "]";
 	}
+
+
 
 	/**
 	 * 
@@ -448,7 +453,6 @@ public class Lab2Utilities {
 	 *         </p>
 	 */
 	public static String countofMult357(int lowerLimit, int upperLimit) {
-		// Check if lowerLimit is greater than upperLimit
 		if (lowerLimit > upperLimit) {
 			return String.format("Error: lower limit (%d) is not less than or equal to upper limit (%d)", lowerLimit,
 					upperLimit);
@@ -472,7 +476,6 @@ public class Lab2Utilities {
 			}
 		}
 
-		// Return the result in the expected format
 		return String.format(
 				"Between (%d) and (%d) there are (%d) multiple of 3, (%d) multiple of 5 and (%d) multiple of 7",
 				lowerLimit, upperLimit, count3, count5, count7);
@@ -522,7 +525,6 @@ public class Lab2Utilities {
 			n /= 10;
 		}
 
-		// Compare the original number with the reverse number
 		if (original == reverse) {
 			result = String.format("Integer (%d) is Palindrome", original);
 		} else {
