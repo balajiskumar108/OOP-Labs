@@ -1,0 +1,19 @@
+public class Code {
+	
+	public static double euclideanDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
+		// Calculate the Euclidean distance between two points in 3D space
+		double x = Math.pow(x2 - x1, 2);
+		double y = Math.pow(y2 - y1, 2);
+		double z = Math.pow(z2 - z1, 2);
+		
+		double distance = Math.sqrt(x + y + z);
+		
+		// Round to two decimal places
+		return Math.round(distance * 100.0) / 100.0;
+	}
+	
+	public static void main(String[] args) {
+		double answer = euclideanDistance(1.0, 3.0, 5.0, 2.0, 4.0, 6.0);
+		System.out.println(answer);
+	}
+}
