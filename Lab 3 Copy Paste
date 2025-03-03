@@ -1,0 +1,219 @@
+ package lab3;
+
+public class TwoDArrayProblems {
+///////////////////////////////////////////////////////////////////////////
+//Full Name : Balaji Sathish Kumar
+//Yorku Email : bsk03@my.yorku.ca
+//Date : 03/02/2025
+//Authenticity Declaration:
+//I declare this submission is the result of my own work and has not been
+//shared with any other student or 3rd party content provider. This submitted
+//piece of work is entirely of my own creation.
+///////////////////////////////////////////////////////////////////////////
+///
+///
+	/*
+	 * Create a public static String method named findExtrema that takes as an
+	 * argument a two-dimensional int array and performs the following tasks: --find
+	 * and print the maximum and minimum values in each row; --find and print the
+	 * maximum and minimum values in each column.
+	 * 
+	 * If, for example, the array { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} } is passed to
+	 * findExtrema, the return value should be: The maximum values along the rows
+	 * are [3,6,9]. The minimum values along the rows are [1,4,7]. The maximum
+	 * values along the columns are [7,8,9]. The minimum values along the columns
+	 * are [1,2,3].
+	 * 
+	 * If the array is null, the return value should be: [null array].
+	 */
+
+	public static String findExtrema(int[][] array) {
+		if (array == null) {
+			return "[null array].";
+		}
+
+		int maxRow = array.length;
+		int maxCol = array[0].length;
+
+		String rowMaxValues = "[";
+		String rowMinValues = "[";
+
+		for (int i = 0; i < maxRow; i++) {
+			int rowMax = array[i][0];
+			int rowMin = array[i][0];
+
+			for (int j = 1; j < maxCol; j++) {
+				rowMax = Math.max(rowMax, array[i][j]);
+				rowMin = Math.min(rowMin, array[i][j]);
+			}
+
+			rowMaxValues += rowMax;
+			rowMinValues += rowMin;
+
+			if (i < maxRow - 1) {
+				rowMaxValues += ",";
+				rowMinValues += ",";
+			}
+		}
+
+		rowMaxValues += "]";
+		rowMinValues += "]";
+
+		String colMaxValues = "[";
+		String colMinValues = "[";
+
+		for (int j = 0; j < maxCol; j++) {
+			int colMax = array[0][j];
+			int colMin = array[0][j];
+
+			for (int i = 1; i < maxRow; i++) {
+				colMax = Math.max(colMax, array[i][j]);
+				colMin = Math.min(colMin, array[i][j]);
+			}
+
+			colMaxValues += colMax;
+			colMinValues += colMin;
+
+			if (j < maxCol - 1) {
+				colMaxValues += ",";
+				colMinValues += ",";
+			}
+		}
+
+		colMaxValues += "]";
+		colMinValues += "]";
+
+		return String.format(
+				"The maximum values along the rows are %s.\n" + "The minimum values along the rows are %s.\n"
+						+ "The maximum values along the columns are %s.\n"
+						+ "The minimum values along the columns are %s.",
+				rowMaxValues, rowMinValues, colMaxValues, colMinValues);
+	}
+
+	/*
+	 * Create a public static String method named rotateArray that takes as an
+	 * argument a square (NxN) two-dimensional int array and performs a 90-degree
+	 * clockwise rotation on it. The method should return the rotated array in the
+	 * form of a String as given in the example below.
+	 * 
+	 * A 90-degree clockwise rotation of an array involves moving the elements such
+	 * that the element at array[i][j] moves to array[j][N-1-i] where N is the
+	 * length of each side of the square array.
+	 * 
+	 * Suppose the following array is provided as argument: {{1, 2, 3}, {4, 5, 6},
+	 * {7, 8, 9}} then rotateArray should return the String: {{7, 4, 1}, {8, 5, 2},
+	 * {9, 6, 3}}.
+	 * 
+	 * If the array is null, the return value should be: [null array]. If the array
+	 * is not square, the return value should be: [not a square array].
+	 */
+
+	public static String rotateArray(int[][] originalArray) {
+		// Handle null array case
+		if (originalArray == null) {
+			return "[null array].";
+		}
+
+		// Check if the array is square
+		int n = originalArray.length;
+		for (int i = 0; i < n; i++) {
+			if (originalArray[i].length != n) {
+				return "[not a square array].";
+			}
+		}
+
+		
+		int[][] rotatedArray = new int[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				rotatedArray[j][n - 1 - i] = originalArray[i][j];
+			}
+		}
+
+		StringBuilder result = new StringBuilder();
+		result.append("{");
+		for (int i = 0; i < n; i++) {
+			result.append("{");
+			for (int j = 0; j < n; j++) {
+				result.append(rotatedArray[i][j]);
+				if (j < n - 1) {
+					result.append(", ");
+				}
+			}
+			result.append("}");
+			if (i < n - 1) {
+				result.append(", ");
+			}
+		}
+		result.append("}.");
+
+		return result.toString();
+	}
+
+	/*
+	 * An n x n matrix is called a positive Markov matrix if each element is
+	 * positive and the sum of the elements in each column is 1. Write a public
+	 * static boolean method named isMarkovMatrix that performs this test on a
+	 * double 2D array.
+	 * 
+	 * This array represents a Markov matrix: {{0.15,0.875,0.375},
+	 * {0.55,0.005,0.225}, {0.30,0.12,0.4}}
+	 * 
+	 * Assume that array will always be square.
+	 */
+	public static boolean isMarkovMatrix(double[][] m) {
+		// Check each element, if this is positive
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[i].length; j++) {
+				if (m[i][j] <= 0) {
+					return false; 
+				}
+			}
+		}
+
+		for (int j = 0; j < m[0].length; j++) {
+			double columnSum = 0;
+			for (int i = 0; i < m.length; i++) {
+				columnSum += m[i][j];
+			}
+			if (Math.abs(columnSum - 1) > 1e-6) { 
+				return false; 
+			}
+		}
+
+		return true;
+	}
+
+	/*
+	 * Consider a public static method findDistances that takes as argument an n x 2
+	 * double array. The geographical coordinates of n different places are stored
+	 * in this n x 2 argument array. The method computes the distance of each place
+	 * to each place and produces an n x n array where the distance of point i (row
+	 * i of argument array) to point j (row j of argument array) is stored at
+	 * element [i][j] of the resultant array. The distance is computed using
+	 * Euclidean 2 dimensional distance formula.
+	 * 
+	 * For the argument array: {{1.0, 2.0}, {3.0, 2.0}} The return value would be:
+	 * {{0.0, 2.0}, {2.0, 0.0}}
+	 * 
+	 * Assume there will always be at least one set of coordinates given.
+	 */
+	public static double[][] findDistances(double[][] m) {
+		int n = m.length; 
+		double[][] distances = new double[n][n]; 
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (i == j) {
+					distances[i][j] = 0.0; 
+				} else {
+					double dx = m[i][0] - m[j][0]; 
+					double dy = m[i][1] - m[j][1]; 
+					distances[i][j] = Math.sqrt(dx * dx + dy * dy); 
+				}
+			}
+		}
+		return distances;
+	}
+
+}
